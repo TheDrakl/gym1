@@ -52,15 +52,17 @@
         v-for="n in 3"
         v-if="isLoading || hasError"
       >
-        <h3 class="text-center py-6 text-2xl font-semibold text-gray-300">
-          <div class="h-6 bg-gray-600 w-6/6 mb-2 rounded"></div>
+        <h3
+          class="text-center py-6 text-2xl font-semibold text-gray-300 animate-pulse"
+        >
+          <div class="h-6 bg-gray-600 w-6/6 mb-2 rounded animate-pulse"></div>
         </h3>
-        <h2 class="text-center text-5xl font-bold mb-8">
-          <div class="h-8 bg-gray-600 w-1/2 mx-auto mb-4 rounded"></div>
+        <h2 class="text-center text-5xl font-bold mb-8 animate-pulse">
+          <div class="h-8 bg-gray-600 w-1/2 mx-auto mb-4 rounded animate-pulse"></div>
         </h2>
-        <ul class="text-center space-y-6 mb-10 list-none">
+        <ul class="text-center space-y-6 mb-10 list-none animate-pulse">
           <li class="flex items-center justify-center space-x-2" v-for="n in 5">
-            <div class="h-4 bg-gray-600 w-4/6 mb-2 rounded"></div>
+            <div class="h-4 bg-gray-600 w-4/6 mb-2 rounded animate-pulse"></div>
           </li>
         </ul>
 
@@ -70,7 +72,7 @@
             'bg-white text-black': !isLoading,
           }"
           :style="{ pointerEvents: isLoading ? 'none' : 'auto' }"
-          class="rounded-lg w-full py-4 flex items-center justify-center text-lg font-semibold transition duration-300 hover:bg-gray-200 mt-auto"
+          class="rounded-lg w-full py-4 flex items-center justify-center text-lg font-semibold transition duration-300 hover:bg-gray-200 mt-auto animate-pulse"
         >
           <div class="h-4 w-1/3 bg-gray-400 animate-pulse rounded"></div>
         </button>
@@ -82,6 +84,7 @@
 <script setup>
 import { ref, onMounted, defineAsyncComponent } from "vue";
 import api from "@/axios";
+import { set } from "lodash";
 const openBaseMember = ref(false);
 const emit = defineEmits();
 const dataToSend = ref({});
@@ -89,9 +92,9 @@ const plans = ref([]);
 const isLoading = ref(true);
 const hasError = ref(false);
 
-const formMember = defineAsyncComponent(() => 
-  import('@/components/alerts/FormMember.vue')
-)
+const formMember = defineAsyncComponent(() =>
+  import("@/components/alerts/FormMember.vue")
+);
 
 const openBaseMemberMethod = (planNumber, price) => {
   openBaseMember.value = !openBaseMember.value;

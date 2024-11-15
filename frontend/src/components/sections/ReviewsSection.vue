@@ -57,7 +57,7 @@
       class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-14 items-stretch text-center mx-8 md:mx-24"
     >
       <div
-        class="bg-blackLight p-6 rounded-lg flex flex-col justify-between appearFromSide hoverScale"
+        class="bg-blackLight p-6 rounded-lg flex flex-col justify-between appearFromSide hoverScale animate-pulse"
         v-for="n in 4"
       >
         <div
@@ -65,17 +65,17 @@
           alt="Img"
         ></div>
         <!--Stars-->
-        <div class="h-4 bg-gray-600 w-1/2 mx-auto mb-4 rounded"></div>
+        <div class="h-4 bg-gray-600 w-1/2 mx-auto mb-4 rounded animate-pulse"></div>
         <h3 class="text-md font-montserrat flex-grow"></h3>
         <!-- Placeholder for the review description text -->
-        <div class="h-4 bg-gray-600 w-full mb-2 rounded"></div>
-        <div class="h-4 bg-gray-600 w-5/6 mb-2 rounded"></div>
-        <div class="h-4 bg-gray-600 w-4/4 mb-2 rounded"></div>
-        <div class="h-4 bg-gray-600 w-3/6 mb-2 rounded"></div>
-        <div class="h-4 bg-gray-600 w-4/4 mb-2 rounded"></div>
+        <div class="h-4 bg-gray-600 w-full mb-2 rounded animate-pulse"></div>
+        <div class="h-4 bg-gray-600 w-5/6 mb-2 rounded animate-pulse"></div>
+        <div class="h-4 bg-gray-600 w-4/4 mb-2 rounded animate-pulse"></div>
+        <div class="h-4 bg-gray-600 w-3/6 mb-2 rounded animate-pulse"></div>
+        <div class="h-4 bg-gray-600 w-4/4 mb-2 rounded animate-pulse"></div>
 
         <!-- Placeholder for the author text -->
-        <div class="h-4 mt-4 bg-gray-600 w-1/3 mx-auto rounded"></div>
+        <div class="h-4 mt-4 bg-gray-600 w-1/3 mx-auto rounded animate-pulse"></div>
       </div>
     </div>
   </section>
@@ -107,8 +107,12 @@ onErrorCaptured((error) => {
   return false;
 });
 
-onMounted(() => {
-  fetchReviews();
-});
+// onMounted(() => {
+//   fetchReviews();
+// });
+
+setTimeout(() => {
+  fetchReviews()
+}, 50000)
 </script>
 
