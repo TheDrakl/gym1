@@ -14,7 +14,6 @@ from rest_framework.exceptions import NotFound
 
 
 class SupplementListView(generics.ListCreateAPIView):
-    # queryset = Supplement.objects.filter(is_active=True)
     queryset = Supplement.objects.all()
     serializer_class = SupplementSerializer
     pagination_class = SupplementDynamicPagination
@@ -22,9 +21,9 @@ class SupplementListView(generics.ListCreateAPIView):
     ordering_fields = ['name', 'price', 'stock']
     ordering = ['name']
 
+    # Override qet_queryset to get { .../search } from url and then fetch data based on search using Q
     def get_queryset(self):
         queryset = super().get_queryset()
-        # queryset = Supplement.objects.filter(is_active=True)
         search_input = self.request.query_params.get('search', None)
 
         if search_input:
@@ -33,6 +32,7 @@ class SupplementListView(generics.ListCreateAPIView):
             )
         return queryset
 
+    # Include ordering_fields in the response
     def options(self, request, *args, **kwargs):
         response = super().options(request, *args, **kwargs)
         response.data['ordering_fields'] = self.ordering_fields
@@ -46,6 +46,7 @@ class SupplementListByCategoryView(generics.ListAPIView):
     ordering_fields = ['name', 'price']
     ordering = ['name']
 
+    # Override qet_queryset with search functionallity and chosen category filtering
     def get_queryset(self):
         category_name = self.kwargs.get('category_name', None)
         category_id = self.kwargs.get('category_id', None)
@@ -136,6 +137,7 @@ class SendPlanEmailView(generics.CreateAPIView):
     serializer_class = EmailPlanValidation
     throttle_classes = [EmailThrottle]
 
+    # Send email about purchasing membership to customer and manager
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -163,6 +165,7 @@ class SendPlanEmailView(generics.CreateAPIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+# Send message about leaving a message on website to customer and manager
 class SendMessageEmailView(generics.CreateAPIView):
     serializer_class = EmailMessageSerializer
     throttle_class = [EmailThrottle]

@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 
 
+# Send email to customer and team
 def send_notification_email(subject_user, subject_team, message_user, message_team, user_email, team_email):
     try:
         send_mail(
