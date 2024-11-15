@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen relative bg" :style="{ backgroundImage: `url(${bg})`}">
+  <div class="min-h-screen relative bg overflow-x-hidden" :style="{ backgroundImage: `url(${bg})`}">
     <!-- Navbar -->
     <navbar-white class="relative z-20"></navbar-white>
     <!-- Hero -->

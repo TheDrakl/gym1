@@ -1,0 +1,64 @@
+services:
+  # Frontend service
+  vue-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend:/app
+      - ./frontend/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80" # Nginx serves the frontend on port 8080
+
+  # Backend service (Django with Gunicorn)
+  web:
+    build:
+      context: ./backend/myproject
+      dockerfile: Dockerfile.prod
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/media
+    expose:
+      - 8000
+    env_file:
+      - backend/.env.prod
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  # PostgreSQL database service
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - backend/.env.prod.db
+    networks:
+      - mynetwork
+
+  # Nginx service
+  nginx:
+    build: ./backend/nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/media
+    ports:
+      - "1337:80" # Expose Nginx on port 80
+    depends_on:
+      - vue-frontend
+      - web
+    networks:
+      - mynetwork
+
+# Define shared volumes
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+# Define network for communication between services
+networks:
+  mynetwork:
+    driver: bridge

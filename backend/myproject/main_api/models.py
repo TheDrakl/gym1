@@ -23,30 +23,41 @@ class Category(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
+        # If category doesn't have pk, then create a new category with pk
         if not self.pk:
             super().save(*args, **kwargs)
 
+        # If there's an image, then convert to WEBP, change name, and delete previous image
         if self.image:
             image_path = self.image.path
 
             with Image.open(image_path) as img:
+                # Convert the image to RGB mode (necessary for saving in WEBP format)
                 img = img.convert("RGB")
+
+                # Create an in-memory byte stream to hold the WEBP data
                 webp_io = BytesIO()
+
+                # Save the image as WEBP format with 80% quality
                 img.save(webp_io, format="WEBP", quality=80)
 
+                # Generate a new file name for the WEBP image
                 webp_file_name = f"category_{self.id}.webp"
 
-                self.image.save(
-                    webp_file_name, ContentFile(webp_io.getvalue()), save=False
-                )
+                # Save the new WEBP image without immediately saving the model instance
+                self.image.save(webp_file_name, ContentFile(webp_io.getvalue()), save=False)
 
+                # Close the in-memory byte stream
                 webp_io.close()
 
+                # Remove the original image file if it exists
                 if os.path.exists(image_path):
                     os.remove(image_path)
 
+        # Save the model instance (now with the new image) to the database
         super().save(*args, **kwargs)
 
+    # Delete image
     def delete(self, *args, **kwargs):
         if self.image:
             self.image.delete(save=False)
@@ -86,35 +97,48 @@ class Supplement(models.Model):
         return f"{self.name}"
 
     def save(self, *args, **kwargs):
+        # If the supplement doesn't have a pk, create a new supplement with pk
         if not self.pk:
             super().save(*args, **kwargs)
 
+        # Set the supplement as active if stock is greater than 0
         self.is_active = self.stock > 0
 
+        # If there’s an image, convert it to WEBP, change name, and delete the previous image
         if self.image:
             image_path = self.image.path
 
             with Image.open(image_path) as img:
+                # Convert the image to RGB mode (necessary for saving in WEBP format)
                 img = img.convert("RGB")
+
+                # Create an in-memory byte stream to hold the WEBP data
                 webp_io = BytesIO()
+
+                # Save the image as WEBP format with 80% quality
                 img.save(webp_io, format="WEBP", quality=80)
 
+                # Generate a new file name for the WEBP image
                 webp_file_name = f"supplement_{self.id}.webp"
 
-                self.image.save(
-                    webp_file_name, ContentFile(webp_io.getvalue()), save=False
-                )
+                # Save the new WEBP image without immediately saving the model instance
+                self.image.save(webp_file_name, ContentFile(webp_io.getvalue()), save=False)
 
+                # Close the in-memory byte stream
                 webp_io.close()
 
+                # Remove the original image file if it exists
                 if os.path.exists(image_path):
                     os.remove(image_path)
 
+        # Save the model instance (now with the new image) to the database
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
+        # Delete the image if it exists
         if self.image:
             self.image.delete(save=False)
+        # Delete the supplement model instance
         super(Supplement, self).delete(*args, **kwargs)
 
 
@@ -175,33 +199,45 @@ class Review(models.Model):
         return f"{self.written_by} - {self.stars}"
 
     def save(self, *args, **kwargs):
+        # If the review doesn't have a pk, create a new review with pk
         if not self.pk:
             super().save(*args, **kwargs)
 
+        # If there’s an image, convert it to WEBP, change name, and delete the previous image
         if self.image:
             image_path = self.image.path
 
             with Image.open(image_path) as img:
+                # Convert the image to RGB mode (necessary for saving in WEBP format)
                 img = img.convert("RGB")
+
+                # Create an in-memory byte stream to hold the WEBP data
                 webp_io = BytesIO()
+
+                # Save the image as WEBP format with 80% quality
                 img.save(webp_io, format="WEBP", quality=80)
 
+                # Generate a new file name for the WEBP image
                 webp_file_name = f"review_{self.id}.webp"
 
-                self.image.save(
-                    webp_file_name, ContentFile(webp_io.getvalue()), save=False
-                )
+                # Save the new WEBP image without immediately saving the model instance
+                self.image.save(webp_file_name, ContentFile(webp_io.getvalue()), save=False)
 
+                # Close the in-memory byte stream
                 webp_io.close()
 
+                # Remove the original image file if it exists
                 if os.path.exists(image_path):
                     os.remove(image_path)
 
+        # Save the model instance (now with the new image) to the database
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
+        # Delete the image if it exists
         if self.image:
             self.image.delete(save=False)
+        # Delete the review model instance
         super(Review, self).delete(*args, **kwargs)
 
 

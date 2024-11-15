@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-black relative bg-cover bg-bottom font-montserrat lg:pt-0"
+    class="bg-black relative bg-cover bg-bottom font-montserrat font-light lg:pt-0"
     :class="
       errorFetching
         ? 'h-[75vh] md:h-[100vh]'
@@ -45,7 +45,7 @@
       </div>
 
       <p
-        class="text-white text-lg text-center mb-2 md:mt-12 font-montserrat pt-32 pb-4 md:pb-0 md:pt-0 md:mr-32"
+        class="text-white text-lg text-center mb-2 md:mt-12 font-montserrat font-light pt-32 pb-4 md:pb-0 md:pt-0 md:mr-32"
         v-if="fetchedSupplements && !errorFetching"
       >
         Total amount of products: {{ totalSupplements }}
