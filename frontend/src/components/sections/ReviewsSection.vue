@@ -107,12 +107,9 @@ onErrorCaptured((error) => {
   return false;
 });
 
-// onMounted(() => {
-//   fetchReviews();
-// });
+onMounted(() => {
+  fetchReviews();
+});
 
-setTimeout(() => {
-  fetchReviews()
-}, 50000)
 </script>
 

@@ -3,10 +3,12 @@
     <div
       v-if="show"
       @click.self="closeModal"
-      
       class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50"
     >
-      <div class="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <div
+        class="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md"
+        v-if="!isSending"
+      >
         <font-awesome-icon
           :icon="['fas', 'xmark']"
           class="absolute top-2 right-2 w-8 h-8 text-black cursor-pointer"
@@ -58,10 +60,10 @@
               id="email"
               type="text"
               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm font-montserrat h-8"
-              v-model="email"
+              v-model="emailAddress"
             />
-            <span v-if="errors.email" class="text-red-500 text-sm">
-              {{ errors.email }}
+            <span v-if="errors.emailAddress" class="text-red-500 text-sm">
+              {{ errors.emailAddress }}
             </span>
           </div>
           <div class="mb-4">
@@ -72,15 +74,15 @@
               id="phone"
               type="text"
               class="mt-1 block w-full border-gray-300 rounded-md shadow-sm font-montserrat h-8"
-              v-model="phone"
+              v-model="phoneNumber"
             />
-            <span v-if="errors.phone" class="text-red-500 text-sm">
-              {{ errors.phone }}
+            <span v-if="errors.phoneNumber" class="text-red-500 text-sm">
+              {{ errors.phoneNumber }}
             </span>
           </div>
           <div class="flex justify-between">
-            <label for="options">Choose the location of the gym:</label>
-            <select v-model="selectedGym" class="bg-gray-50">
+            <label for="gym-select">Choose the location of the gym:</label>
+            <select v-model="selectedGym" id="gym-select" class="bg-gray-50">
               <option :value="gym.name" v-for="gym in gyms" :key="gym.id">
                 {{ gym.name }}
               </option>
@@ -106,6 +108,27 @@
           </div>
         </form>
       </div>
+      <div class="text-center mt-20" v-if="isSending">
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            class="inline w-16 h-16 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
     </div>
   </teleport>
 </template>
@@ -114,6 +137,7 @@
 import { notify } from "@kyvg/vue3-notification";
 import api from "@/axios";
 import { onMounted, ref } from "vue";
+import { validationForm } from "@/utils/validationForm";
 
 const props = defineProps({
   show: {
@@ -130,69 +154,49 @@ const emits = defineEmits(["close"]);
 const errors = ref({});
 const firstName = ref("");
 const lastName = ref("");
-const email = ref("");
-const phone = ref("");
+const emailAddress = ref("");
+const phoneNumber = ref("");
 const receivedData = ref(props.receivedData);
 const gyms = ref(null);
 const selectedGym = ref("");
-
-const isNumeric = (str) => {
-  return !isNaN(str) && !isNaN(parseFloat(str));
-};
-
-const isValidEmail = (email) => {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailPattern.test(email);
-};
-
-const isPhoneNumberValid = (phone) => {
-  return /^[0-9\s\-()]+$/.test(phone);
-};
+const isSending = ref(false);
 
 const closeModal = () => {
   emits("close");
 };
 
 const validate = () => {
-  errors.value = {};
-  const nameMinLength = 2;
-  const emailMinLength = 5;
-  const phoneMinLength = 7;
+  const formData = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    emailAddress: emailAddress.value,
+    phoneNumber: phoneNumber.value,
+  };
 
-  if (!firstName.value) {
-    errors.value.firstName = "First name is required.";
-  } else if (isNumeric(firstName.value)) {
-    errors.value.firstName = "First name should not be numeric.";
-  } else if (firstName.value.length <= nameMinLength) {
-    errors.value.firstName = "Enter a valid first name.";
-  }
+  // Run the validation function
+  errors.value = validationForm(formData);
 
-  if (!lastName.value) {
-    errors.value.lastName = "Last name is required.";
-  } else if (isNumeric(lastName.value)) {
-    errors.value.lastName = "Last name should not be numeric.";
-  } else if (lastName.value.length <= nameMinLength) {
-    errors.value.lastName = "Enter a valid last name.";
-  }
-
-  if (!email.value) {
-    errors.value.email = "Email is required.";
-  } else if (!isValidEmail(email.value)) {
-    errors.value.email = "Email must be valid.";
-  } else if (email.value.length <= emailMinLength) {
-    errors.value.email = "Enter a valid email.";
-  }
-
-  if (!phone.value) {
-    errors.value.phone = "Phone number is required.";
-  } else if (!isPhoneNumberValid(phone.value)) {
-    errors.value.phone =
-      "Phone number must contain only numbers and allowed symbols.";
-  } else if (phone.value.length <= phoneMinLength) {
-    errors.value.phone = "Enter a valid phone number.";
-  }
-
+  // Check if there are any errors
   return Object.keys(errors.value).length === 0;
+};
+
+const sendEmail = async () => {
+  try {
+    isSending.value = true;
+    const response = await api.post("send-email/", {
+      first_name: firstName.value,
+      last_name: lastName.value,
+      email: email.value,
+      phone_number: phone.value,
+      selected_gym: selectedGym.value,
+    });
+    isSending.value = false;
+    return response.data.message;
+  } catch (error) {
+    throw error;
+  } finally {
+    isSending.value = false;
+  }
 };
 
 const handleSubmit = async () => {
@@ -226,26 +230,11 @@ const handleSubmit = async () => {
   }
 };
 
-const sendEmail = async () => {
-  try {
-    const response = await api.post("send-email/", {
-      first_name: firstName.value,
-      last_name: lastName.value,
-      email: email.value,
-      phone_number: phone.value,
-      selected_gym: selectedGym.value,
-    });
-    return response.data.message;
-  } catch (error) {
-    throw error;
-  }
-};
-
 const fetchGyms = async () => {
   try {
     const response = await api.get("gyms/");
     gyms.value = response.data;
-    selectedGym.value = gyms.value[0].name
+    selectedGym.value = gyms.value[0].name;
   } catch (error) {
     console.log("Error in fetching data", { error });
   }

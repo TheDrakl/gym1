@@ -1,11 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-// import HomeView from "../views/HomeView.vue";
-// import AboutView from "../views/AboutView.vue";
-// import ContactView from "../views/ContactView.vue";
-// import ShopView from "../views/ShopView.vue";
-// import SupplementDetailView from "../views/SupplementDetailView.vue";
-
+// Lazy loading pages
 const routes = [
   {
     path: "/",
@@ -43,6 +38,7 @@ const routes = [
   },
 ];
 
+// Create router
 const router = createRouter({
   history: createWebHistory(),
   routes,

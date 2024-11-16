@@ -152,6 +152,7 @@ const fetchedSupplements = ref([]);
 const totalPages = ref("");
 const totalSupplements = ref("");
 const searchInput = ref("");
+const previousSearched = ref("")
 const showCart = ref(false);
 const errorFetching = ref(false);
 const selectedCategoryId = ref();
@@ -193,6 +194,9 @@ const fetchSupplements = async (resetPage = false) => {
     pageNumber.value = 1;
   }
   try {
+    if (searchInput.value === previousSearched.value && previousSearched.value !== '') {
+      return
+    }
     isLoading.value = true;
     let ordering = "";
     if (selectedSortByNum.value === 0 || selectedSortByNum.value === 1) {
@@ -209,6 +213,7 @@ const fetchSupplements = async (resetPage = false) => {
       ? `category/id/${selectedCategoryId.value}/?page=${pageNumber.value}${search}${ordering}&page_size=${supplementsPerPage.value}`
       : `supplements/?page=${pageNumber.value}${search}${ordering}&page_size=${supplementsPerPage.value}`;
 
+    previousSearched.value = searchInput.value
     const response = await api.get(url);
     isLoading.value = false;
     fetchedSupplements.value = response.data.results;

@@ -84,7 +84,7 @@
 <script setup>
 import { ref, onMounted, defineAsyncComponent } from "vue";
 import api from "@/axios";
-import { set } from "lodash";
+
 const openBaseMember = ref(false);
 const emit = defineEmits();
 const dataToSend = ref({});
