@@ -11,4 +11,13 @@ then
     echo "PostgreSQL started"
 fi
 
+echo "Collecting static files"
+python manage.py collectstatic --noinput
+
+echo "Applying database migration"
+python manage.py migrate
+
+echo "Loading data from fixtures"
+python manage.py loaddata fixtures/initial_data.json
+
 exec "$@"

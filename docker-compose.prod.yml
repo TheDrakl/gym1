@@ -45,7 +45,7 @@ services:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/media
     ports:
-      - "1337:80" # Expose Nginx on port 80
+      - "8000:80" # Expose Nginx on port 80
     depends_on:
       - vue-frontend
       - web

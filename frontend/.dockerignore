@@ -1,5 +1,8 @@
-node_modules/
+node_modules
 *.log
-.git/
-.DS_Store
 *.md
+*.git
+*.vscode
+Dockerfile
+docker-compose.yml
+frontend/dist

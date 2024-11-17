@@ -1,0 +1,43 @@
+services:
+  # Frontend service
+  vue-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/index.html:/app/index.html
+    ports:
+      - "8080:8080" # Nginx serves the frontend on port 8080
+
+  # Backend service 
+  web:
+    build: ./backend/myproject
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend/myproject/:/usr/src/myproject/
+    ports:
+      - 8000:8000
+    env_file:
+      - ./backend/.env.dev
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/  # Persistent storage for PostgreSQL data
+    environment:
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_dev
+
+
+# Define shared volumes
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
+
+# Define network for communication between services
+networks:
+  mynetwork:
+    driver: bridge
