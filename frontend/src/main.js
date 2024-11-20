@@ -8,7 +8,6 @@ import { createHead } from "@vueuse/head";
 import App from "./App.vue";
 import router from "./router";
 
-
 // Navbar
 const NavbarBlack = defineAsyncComponent(() =>
   import("@/components/navbar/NavbarBlack.vue")
@@ -46,7 +45,12 @@ import {
   faSortDown,
   faAngleRight,
 } from "@fortawesome/free-solid-svg-icons";
-import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import {
+  faInstagram,
+  faYoutube,
+  faFacebook,
+  faTwitter,
+} from "@fortawesome/free-brands-svg-icons";
 
 library.add(
   faMinus,
@@ -56,6 +60,8 @@ library.add(
   faX,
   faInstagram,
   faFacebook,
+  faYoutube,
+  faTwitter,
   faEnvelope,
   faCartShopping,
   faTrash,
@@ -69,7 +75,7 @@ library.add(
   faSort,
   faSortUp,
   faSortDown,
-  faAngleRight,
+  faAngleRight
 );
 
 const clickOutside = {
@@ -88,7 +94,7 @@ const clickOutside = {
 };
 
 const app = createApp(App).directive("click-outside", clickOutside);
-const head = createHead()
+const head = createHead();
 
 app.component("font-awesome-icon", FontAwesomeIcon);
 
@@ -99,6 +105,6 @@ app.component("the-footer", TheFooter);
 
 app.use(router);
 app.use(Notifications);
-app.use(head)
+app.use(head);
 
 app.mount("#app");

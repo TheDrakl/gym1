@@ -1,23 +1,22 @@
 <template>
-  <div class="line h-[0.5px] bg-gray-800"></div>
   <footer>
-    <div class="bg-blackLight text-white p-8 md:pt-16 md:px-16 md:pb-4">
+    <div
+      class="bg-blackLight2 text-white p-8 md:pt-16 md:px-16 md:pb-4 font-roboto"
+    >
       <section
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12 md:gap-16 text-center md:text-start"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1fr,1.5fr,1.5fr,1fr] gap-12 md:gap-16 text-center md:text-start"
       >
         <!-- Gym info -->
         <div class="flex flex-col items-center md:items-start">
-          <h2 class="text-3xl font-bold mb-4 text-white">GymName</h2>
-          <p class="text-base font-roboto font-light text-milkBlue">
-            At GymName, we're dedicated to helping you reach your fitness goals
-            with the support of experienced trainers and state-of-the-art
-            equipment. Join our community today!
+          <h2 class="text-4xl font-bold mb-4 text-lightGray">GymName</h2>
+          <p class="text-lg font-inter font-light text-milkBlue">
+            Your daily gym
           </p>
         </div>
 
         <!-- Links -->
         <div class="flex flex-col items-center md:items-start">
-          <h2 class="text-3xl font-bold mb-4 text-white">Quick Links</h2>
+          <h2 class="text-xl font-bold mb-4 text-lightGray">Services</h2>
           <ul class="space-y-3 text-lg text-milkBlue font-roboto">
             <li><a href="#" class="hover-underline-animation">Home</a></li>
             <li><a href="#" class="hover-underline-animation">About</a></li>
@@ -28,7 +27,7 @@
 
         <!-- Contact Info -->
         <div class="flex flex-col items-center md:items-start">
-          <h2 class="text-3xl font-bold mb-4 text-white">Contact Us</h2>
+          <h2 class="text-xl font-bold mb-4 text-lightGray">Contact Us</h2>
           <ul class="space-y-4 text-lg text-milkBlue font-roboto">
             <li class="flex items-center justify-center md:justify-start">
               <font-awesome-icon
@@ -50,13 +49,52 @@
             </li>
           </ul>
         </div>
+
+        <!-- Social Media Links -->
+        <div class="flex flex-col">
+          <div class="space-between space-x-8 text-3xl">
+            <font-awesome-icon
+              :icon="['fab', 'instagram']"
+              class="text-milkBlue cursor-pointer"
+            />
+            <font-awesome-icon
+              :icon="['fab', 'facebook']"
+              class="text-milkBlue cursor-pointer"
+            />
+            <font-awesome-icon
+              :icon="['fab', 'twitter']"
+              class="text-milkBlue cursor-pointer"
+            />
+            <font-awesome-icon
+              :icon="['fab', 'youtube']"
+              class="text-milkBlue cursor-pointer"
+            />
+          </div>
+          <!-- Newsletter -->
+          <div class="flex flex-col items-center mt-8 md:items-start">
+            <h2 class="text-xl font-bold mb-4 text-lightGray text-center">Newsletter</h2>
+            <form class="flex flex-col space-y-4">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="p-2 w-[25vh] rounded bg-black text-white border border-lightGray placeholder-lightGray focus:outline-none focus:ring-1 focus:ring-orange-900"
+              />
+              <button
+                class="p-2 rounded bg-orange-500 hover:bg-orange-600 text-white font-bold"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
       </section>
 
       <!-- All rights reserved by -->
-      <div class="mt-16 text-center">
+      <div class="border-t-2 border-colorLine mt-16"></div>
+      <div class="mt-8 mb-4 text-center">
         <p class="text-sm font-mono text-milkBlue">
           &copy; 2024 GymName. All rights reserved. Created by
-          <span class="text-orange-500">Denys Melnyk</span>
+          <span class="text-orange-500 hover:underline"><a href="https://github.com/TheDrakl">Denys Melnyk</a></span>
         </p>
       </div>
     </div>

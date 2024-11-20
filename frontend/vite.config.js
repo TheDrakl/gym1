@@ -11,4 +11,7 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  devServer: {
+    historyApiFallback: true, // This allows Vue Router to handle non-API routes
+  },
 });

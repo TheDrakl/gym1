@@ -1,8 +1,0 @@
-node_modules
-*.log
-*.md
-*.git
-*.vscode
-Dockerfile
-docker-compose.yml
-frontend/dist

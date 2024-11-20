@@ -17,6 +17,7 @@ export default {
         montserrat: ['Montserrat', 'Georgia', 'sans-serif'],
         neue: ['Bebas Neue', 'sans-serif'],
         roboto: ['Roboto', 'sans-serif'],
+        inter: ['Inter', 'sans-serif']
       },
       fontSize: {
         baseSize: '16px',
@@ -46,9 +47,12 @@ export default {
         darkGray: 'rgba(230, 230, 230, 1)',
         blackBg: 'rgba(30, 30, 32, 1)',
         blackLight: 'rgba(32,32,32,255)',
+        blackLight2: 'rgba(18, 20, 23, 1)',
+        lightGray: 'rgba(169, 169, 169, 1)',
         whiteText: 'rgba(252, 251, 254, 1)',
         blueButton: 'rgba(34, 108, 254, 1)',
         greenButton: 'rgba(2, 255, 255, 1)',
+        colorLine: 'rgba(59, 62, 64, 1)',
 
 
         purpleGood: 'hsl(272,61%,25%)',

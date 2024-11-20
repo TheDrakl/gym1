@@ -43,13 +43,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Scroll to a specific position when navigating to a specific route
     if (to.name === "Contact") {
-      // Change this to your specific route name
-      return { top: 150 }; // Scroll to 300px from the top
+      return { top: 150 };
     }
-    // You can also add other logic for other routes if needed
-    return savedPosition || { top: 0 }; // Default to the saved position or scroll to the top
+    return savedPosition || { top: 0 }; 
   },
 });
 
