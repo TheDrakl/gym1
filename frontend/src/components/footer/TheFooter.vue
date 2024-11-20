@@ -15,7 +15,7 @@
         </div>
 
         <!-- Links -->
-        <div class="flex flex-col items-center md:items-start">
+        <div class="lg:flex-col items-center md:items-start hidden lg:flex">
           <h2 class="text-xl font-bold mb-4 text-lightGray">Services</h2>
           <ul class="space-y-3 text-lg text-milkBlue font-roboto">
             <li><a href="#" class="hover-underline-animation">Home</a></li>
@@ -72,7 +72,9 @@
           </div>
           <!-- Newsletter -->
           <div class="flex flex-col items-center mt-8 md:items-start">
-            <h2 class="text-xl font-bold mb-4 text-lightGray text-center">Newsletter</h2>
+            <h2 class="text-xl font-bold mb-4 text-lightGray text-center">
+              Newsletter
+            </h2>
             <form class="flex flex-col space-y-4">
               <input
                 type="email"
@@ -94,7 +96,9 @@
       <div class="mt-8 mb-4 text-center">
         <p class="text-sm font-mono text-milkBlue">
           &copy; 2024 GymName. All rights reserved. Created by
-          <span class="text-orange-500 hover:underline"><a href="https://github.com/TheDrakl">Denys Melnyk</a></span>
+          <span class="text-orange-500 hover:underline"
+            ><a href="https://github.com/TheDrakl">Denys Melnyk</a></span
+          >
         </p>
       </div>
     </div>
