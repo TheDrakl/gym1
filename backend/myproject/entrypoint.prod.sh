@@ -17,7 +17,11 @@ python manage.py collectstatic --noinput
 echo "Applying database migration"
 python manage.py migrate
 
-echo "Loading data from fixtures"
-python manage.py loaddata fixtures/initial_data.json
+if [ -f fixtures/initial_data.json ]; then
+    echo "Loading data from fixtures"
+    python manage.py loaddata fixtures/initial_data.json
+else
+    echo "Fixture file does not exist"
+fi
 
 exec "$@"

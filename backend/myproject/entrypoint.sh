@@ -11,7 +11,10 @@ then
     echo "PostgreSQL started"
 fi
 
-# python manage.py flush --no-input
-# python manage.py migrate
+echo "Applying database migration"
+python manage.py migrate
+
+echo "Loading data from fixtures"
+python manage.py loaddata fixtures/initial_data.json
 
 exec "$@"
