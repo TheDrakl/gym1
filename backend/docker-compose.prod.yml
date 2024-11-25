@@ -4,7 +4,7 @@ services:
       context: ./myproject
       dockerfile: Dockerfile.prod
     # Run gunicorn on port 8000 
-    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT
     volumes:
       - static_volume:/home/app/web/staticfiles
       - media_volume:/home/app/web/media
