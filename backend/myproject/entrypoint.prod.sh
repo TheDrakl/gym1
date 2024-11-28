@@ -11,6 +11,8 @@ then
     echo "PostgreSQL started"
 fi
 
+echo "Port:" $PORT
+
 echo "Collecting static files"
 python manage.py collectstatic --noinput
 
