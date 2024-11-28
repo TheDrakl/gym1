@@ -1,5 +1,3 @@
-# Use a two-stage build process
-
 ###########
 # BUILDER #
 ###########
@@ -41,10 +39,13 @@ RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir /whee
 # Copy application code
 COPY . /app
 
+# Copy collected static files into the container
+COPY ./staticfiles /home/app/web/staticfiles
+
 # Expose the port Render should listen on
 EXPOSE 8000
 
-# Change user
+# Change user for security reasons
 RUN adduser --disabled-password app
 RUN chown -R app:app /app
 USER app
