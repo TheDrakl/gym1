@@ -1,7 +1,7 @@
 services:
   web:
     build: ./myproject
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:$PORT
     volumes:
       - ./myproject/:/usr/src/myproject/
     ports:
