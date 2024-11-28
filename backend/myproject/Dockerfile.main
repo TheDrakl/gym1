@@ -40,7 +40,7 @@ RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir /whee
 COPY . /app
 
 # Copy collected static files into the container
-COPY ./staticfiles /home/app/web/staticfiles
+COPY ./myproject/staticfiles /home/app/web/staticfiles
 
 # Expose the port Render should listen on
 EXPOSE 8000
