@@ -22,8 +22,8 @@
 const navigateToSection = (sectionId) => {
   const section = document.getElementById(sectionId);
   if (section) {
-    console.log("Environment API Key:", process.env.VUE_APP_SECRET_API_KEY);
-    console.log("Environment API Key:", process.env.VUE_APP_KEY);
+    console.log("Environment API Key:", process.env.VITE_APP_SECRET_API_KEY);
+    console.log("Environment API Key:", process.env.VITE_APP_KEY);
     console.log('asdaadsadsads')
     section.scrollIntoView({ behavior: "smooth" });
   }

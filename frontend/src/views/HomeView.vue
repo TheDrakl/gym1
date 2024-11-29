@@ -16,7 +16,7 @@
   <plans-section></plans-section>
 
   <!-- Our recent reviews -->
-  <reviews-section></reviews-section>
+  <reviews-section class="mb-12"></reviews-section>
 </template>
 <script setup>
 // Sections
