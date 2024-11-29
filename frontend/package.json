@@ -18,6 +18,7 @@
     "@tailwindcss/line-clamp": "^0.4.4",
     "@vueuse/head": "^2.0.0",
     "axios": "^1.7.7",
+    "dotenv": "^16.4.5",
     "esbuild-wasm": "^0.24.0",
     "lodash": "^4.17.21",
     "nginx": "^1.0.8",
