@@ -1,22 +1,40 @@
-# FROM node:16.10.0-alpine3.13 as build-stage
+# Use a Node.js 18 image for building the app
 FROM node:18 as build-stage
-# set the working directory
+
+# Set the working directory
 WORKDIR /app
-# Copy the working directory in the container
+
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
 # Install the project dependencies
 RUN npm install
-# Copy the rest of the project files to the container
+
+# Copy the rest of the project files into the container
 COPY . .
-# Build the Vue.js application to the production mode to dist folder
+
+# Set build-time environment variables (you can use --build-arg to inject these when building)
+ARG VITE_SECRET_API_KEY
+ARG VITE_KEY
+
+# Set the environment variables for the app to access during the build
+ENV VITE_SECRET_API_KEY=${VITE_SECRET_API_KEY}
+ENV VITE_KEY=${VITE_KEY}
+
+# Build the Vue.js application in production mode (output to dist folder)
 RUN npm run build
-# Use the lightweight Nginx image from the previous stage for the nginx container
+
+# Use the lightweight Nginx image to serve the built app
 FROM nginx:stable-alpine as production-stage
-# Copy the build application from the previous stage to the Nginx container
+
+# Copy the build from the build stage to the Nginx container
 COPY --from=build-stage /app/dist /usr/share/nginx/html
-# Copy the nginx configuration file
+
+# Copy custom Nginx configuration
 COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-# Expose the port 80
+
+# Expose port 80 for the container
 EXPOSE 80
-# Start Nginx to serve the application
+
+# Start Nginx to serve the Vue.js app
 CMD ["nginx", "-g", "daemon off;"]
