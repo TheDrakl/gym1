@@ -53,4 +53,4 @@ RUN chown -R app:app /app
 USER app
 
 # Command to run Nginx and Gunicorn
-CMD service nginx start && gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+CMD service nginx start && tail -f /var/log/nginx/error.log & gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
