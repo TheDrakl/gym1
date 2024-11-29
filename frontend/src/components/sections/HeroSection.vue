@@ -22,6 +22,8 @@
 const navigateToSection = (sectionId) => {
   const section = document.getElementById(sectionId);
   if (section) {
+    const vite = process.env.VITE_KEY
+    console.log('Process ', vite)
     console.log("Environment API Key:", import.meta.env.VITE_SECRET_API_KEY); // Logs: the API key
     console.log("Environment Key:", import.meta.env.VITE_KEY); // Logs: "CEHS"
     section.scrollIntoView({ behavior: "smooth" });
