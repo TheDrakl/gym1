@@ -21,6 +21,7 @@
     "esbuild-wasm": "^0.24.0",
     "lodash": "^4.17.21",
     "nginx": "^1.0.8",
+    "postcss-selector-parser": "^7.0.0",
     "vue": "^3.4.29",
     "vue-meta": "^2.4.0",
     "vue-router": "^4.4.5"
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.5",
     "autoprefixer": "^10.4.20",
+    "dotenv-webpack": "^8.1.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
     "vite": "^5.4.11"

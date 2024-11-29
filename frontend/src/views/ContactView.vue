@@ -207,6 +207,7 @@ const errorSending = ref(false);
 const isSending = ref(false);
 
 const validate = () => {
+
   const formData = {
     firstName: firstName.value,
     lastName: lastName.value,
@@ -254,7 +255,6 @@ const handleSubmitForm = async () => {
         behavior: "smooth",
       });
       const message = await sendMail();
-      console.log(message);
       isSubmitted.value = true;
     } catch (error) {
       errorSending.value = true;

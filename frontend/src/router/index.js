@@ -45,6 +45,7 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     if (to.name === "Contact") {
       return { top: 150 };
+
     }
     return savedPosition || { top: 0 }; 
   },
