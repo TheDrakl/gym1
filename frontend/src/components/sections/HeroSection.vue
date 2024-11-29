@@ -24,7 +24,9 @@ const navigateToSection = (sectionId) => {
   if (section) {
     console.log("Environment API Key:", process.env.VITE_APP_SECRET_API_KEY);
     console.log("Environment API Key:", process.env.VITE_APP_KEY);
-    console.log('asdaadsadsads')
+    console.log("asdaadsadsads");
+    console.log(import.meta.env.VITE_APP_SECRET_API_KEY); // Logs: "your-api-key-here"
+    console.log(import.meta.env.VITE_APP_KEY); // Logs: "https://backend.example.com"
     section.scrollIntoView({ behavior: "smooth" });
   }
   return {
