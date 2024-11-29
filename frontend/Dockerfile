@@ -1,4 +1,5 @@
-FROM node:16.10.0-alpine3.13 as build-stage
+# FROM node:16.10.0-alpine3.13 as build-stage
+FROM node:18 as build-stage
 # set the working directory
 WORKDIR /app
 # Copy the working directory in the container
