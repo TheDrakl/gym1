@@ -15,4 +15,4 @@ class APIKeyMiddleware:
         
         # Continue processing the request if the API key is valid
         response = self.get_response(request)
-        return response
+        return responsehe
