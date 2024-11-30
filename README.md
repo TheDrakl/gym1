@@ -41,6 +41,15 @@ Steps to Run Locally
     Frontend: http://127.0.0.1:8080/
     Backend API: http://127.0.0.1:8080/api/
 
+Creating superuser and accessing admin menu
+
+	1. Create super user
+
+  	python manage.py createsuperuser
+
+   	2. Go to http://127.0.0.1:8080/admin/ and log in
+
+
 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
