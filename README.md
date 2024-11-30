@@ -20,5 +20,5 @@ Steps to Run Locally
 
     1. Clone the repository:
     
-  git clone https://github.com/TheDrakl/gym-new/
+  git clone [https://github.com/TheDrakl/gym1]
   cd gym-new
