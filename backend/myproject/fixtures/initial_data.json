@@ -64,7 +64,7 @@
             "written_by": "John Doe",
             "description": "Great basic plan! It works perfectly for my gym. I’ve been using it for a few months now, and it covers all the essentials I need. I especially appreciate the ease of access and simplicity of the interface. It’s great value for the price!",
             "stars": 4,
-            "image": "reviews/review-basic-1.jpeg",
+            "image": "reviews/review-basic-1.webp",
             "created_at": "2024-11-13T12:00:00Z",
             "updated_at": "2024-11-13T12:00:00Z"
         }
@@ -76,7 +76,7 @@
             "written_by": "Jane Smith",
             "description": "Advanced plan is solid, but the price could be lower. I’ve been using the advanced plan for a couple of weeks, and I’m happy with the added features like personalized training plans and extra support. However, I do feel it’s a bit on the expensive side for what it offers. Could be a little more affordable.",
             "stars": 3,
-            "image": "reviews/review-basic-2.jpeg",
+            "image": "reviews/review-basic-2.webp",
             "created_at": "2024-11-13T12:00:00Z",
             "updated_at": "2024-11-13T12:00:00Z"
         }
@@ -88,7 +88,7 @@
             "written_by": "Michael Johnson",
             "description": "Premium plan is amazing! The extra features are a game changer. As a frequent gym-goer, I love the added benefits of the premium plan, especially the advanced workout tracking and recovery tips. The integration with wearable devices is fantastic, and I feel more motivated to push myself further. Highly recommend if you’re serious about your fitness goals!",
             "stars": 5,
-            "image": "reviews/review-basic-3.jpeg",
+            "image": "reviews/review-basic-3.webp",
             "created_at": "2024-11-13T12:00:00Z",
             "updated_at": "2024-11-13T12:00:00Z"
         }
@@ -100,7 +100,7 @@
             "written_by": "Emily Davis",
             "description": "Premium plan is amazing! The extra features are a game changer. As a frequent gym-goer, I love the added benefits of the premium plan, especially the advanced workout tracking and recovery tips. The integration with wearable devices is fantastic, and I feel more motivated to push myself further. Highly recommend if you’re serious about your fitness goals!",
             "stars": 4,
-            "image": "reviews/review-basic-4.jpeg",
+            "image": "reviews/review-basic-4.webp",
             "created_at": "2024-11-13T12:00:00Z",
             "updated_at": "2024-11-13T12:00:00Z"
         }
