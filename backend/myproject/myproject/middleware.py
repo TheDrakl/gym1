@@ -16,9 +16,6 @@ from django.http import JsonResponse
 #         # Continue processing the request if the API key is valid
 #         response = self.get_response(request)
 #         return response
-from django.conf import settings
-from django.http import JsonResponse
-
 def api_key_middleware(get_response):
     def middleware(request):
         if request.method == "OPTIONS":
@@ -31,6 +28,9 @@ def api_key_middleware(get_response):
 
         # Skip the API key check for non-API routes (like media files)
         if request.path.startswith(settings.MEDIA_URL):
+            return get_response(request)
+        
+        if request.path.startswith(reverse('admin:index').rstrip('/')):
             return get_response(request)
 
         api_key = request.headers.get("X-Api-Key")
