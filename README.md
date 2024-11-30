@@ -33,8 +33,7 @@ Steps to Run Locally
    
     2. Build and start the containers using Docker Compose:
 
-    cd frontend && docker-compose up -d --build
-    cd .. && cd backend && docker-compose -f docker-compose.yml up -d --build
+    docker-compose -f docker-compose.prod.yml up -d --build
 
     3. Access the application:
     
