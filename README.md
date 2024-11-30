@@ -20,18 +20,18 @@ Steps to Run Locally
 
     1. Clone the repository:
     
-  	git clone [https://github.com/TheDrakl/gym1]
-  	cd gym-new
+    git clone [https://github.com/TheDrakl/gym1]
+    cd gym-new
    
     2. Build and start the containers using Docker Compose:
 
-    	cd frontend && docker-compose up -d --build
-     	cd .. && cd backend && docker-compose -f docker-compose.yml up -d --build
+    cd frontend && docker-compose up -d --build
+    cd .. && cd backend && docker-compose -f docker-compose.yml up -d --build
 
     3. Access the application:
     
-    		Frontend: http://127.0.0.1:8080/
-		Backend API: http://127.0.0.1:8080/api/
+    Frontend: http://127.0.0.1:8080/
+    Backend API: http://127.0.0.1:8080/api/
 
 License
 
