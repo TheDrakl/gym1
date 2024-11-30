@@ -97,7 +97,7 @@
         <p class="text-sm font-mono text-milkBlue">
           &copy; 2024 GymName. All rights reserved. Created by
           <span class="text-orange-500 hover:underline"
-            ><a href="https://github.com/TheDrakl">Denys Melnyk</a></span
+            ><a href="https://github.com/TheDrakl">TheDrakl</a></span
           >
         </p>
       </div>
