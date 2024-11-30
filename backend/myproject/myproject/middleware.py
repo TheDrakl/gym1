@@ -7,7 +7,7 @@ class APIKeyMiddleware:
 
     def __call__(self, request):
         # Get the API key from request headers
-        api_key = request.headers.get('X-API-KEY')
+        api_key = request.headers.get('X-Api-Key')
         
         # Check if the API key matches the one stored in settings
         if api_key != settings.SECRET_API_KEY:
