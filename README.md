@@ -47,8 +47,10 @@ Creating superuser and accessing admin menu
 
   	python manage.py createsuperuser
 
-   	2. Go to http://127.0.0.1:8080/admin/ and log in
+   	2. Aceess admin panel
 
+ 	http://127.0.0.1:8080/admin/
+     	
 
 License
 
