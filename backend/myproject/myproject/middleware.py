@@ -16,6 +16,8 @@ from django.http import JsonResponse
 #         # Continue processing the request if the API key is valid
 #         response = self.get_response(request)
 #         return response
+from django.conf import settings
+from django.http import JsonResponse
 
 def api_key_middleware(get_response):
     def middleware(request):
@@ -27,6 +29,10 @@ def api_key_middleware(get_response):
             response["Access-Control-Allow-Headers"] = "X-Api-Key, Content-Type"
             return response
 
+        # Skip the API key check for non-API routes (like media files)
+        if request.path.startswith(settings.MEDIA_URL):
+            return get_response(request)
+
         api_key = request.headers.get("X-Api-Key")
         if api_key != settings.SECRET_API_KEY:
             return JsonResponse({"error": "Forbidden"}, status=403)
@@ -34,3 +40,4 @@ def api_key_middleware(get_response):
         return get_response(request)
 
     return middleware
+
