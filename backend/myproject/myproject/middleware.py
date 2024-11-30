@@ -20,11 +20,6 @@ from django.urls import reverse
 def api_key_middleware(get_response):
     def middleware(request):
         if request.method == "OPTIONS":
-            # Allow preflight requests
-            ordering_fields = ["field1", "field2", "field3"]  # Example ordering fields
-
-            # Create the response with the usual data
-            response = JsonResponse({"ordering_fields": ordering_fields})
             response = JsonResponse({"message": "CORS preflight allowed"}, status=200)
             response["Access-Control-Allow-Origin"] = "*"
             response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
