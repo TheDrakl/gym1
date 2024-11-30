@@ -187,7 +187,6 @@ const toggleSection = (section) => {
 const fetchOrderingByOptions = async () => {
   try {
     const response = await api.options("supplements/");
-    console.log(response)
     orderByFields.value = response.data.ordering_fields || [];
     showSortBy.value = new Array(orderByFields.value.length).fill(0);
   } catch (error) {
