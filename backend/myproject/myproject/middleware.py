@@ -19,17 +19,16 @@ from django.http import JsonResponse
 
 def api_key_middleware(get_response):
     def middleware(request):
-        # Handle OPTIONS request for CORS preflight
         if request.method == "OPTIONS":
-            response = HttpResponse(status=204)  # No content
+            # Allow preflight requests
+            response = JsonResponse({"message": "CORS preflight allowed"}, status=200)
             response["Access-Control-Allow-Origin"] = "*"
             response["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS"
             response["Access-Control-Allow-Headers"] = "X-Api-Key, Content-Type"
             return response
 
-        # Check for API key on other requests
         api_key = request.headers.get("X-Api-Key")
-        if api_key != "4aa5ff9fd0a040asadsaa9f4f07asdadb88f1959bcca5b0ba25c339db4b9dafacd736beca69":
+        if api_key != settings.SECRET_API_KEY:
             return JsonResponse({"error": "Forbidden"}, status=403)
 
         return get_response(request)
