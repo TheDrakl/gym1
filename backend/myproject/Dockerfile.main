@@ -39,9 +39,6 @@ RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir /whee
 # Copy application code
 COPY . /app
 
-# Set Django settings module
-ENV DJANGO_SETTINGS_MODULE=myproject.settings
-
 # Collect static files
 RUN python manage.py collectstatic --noinput
 
