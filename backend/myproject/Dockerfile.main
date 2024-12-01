@@ -1,0 +1,54 @@
+###########
+# BUILDER #
+###########
+FROM python:3.11.4-slim-buster as builder
+
+WORKDIR /usr/src/app
+
+# Environment settings
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends gcc
+
+# Install Python dependencies for linting and building wheels
+RUN pip install --upgrade pip
+RUN pip install flake8==6.0.0
+COPY ./requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /wheels -r requirements.txt
+
+#########
+# FINAL #
+#########
+FROM python:3.11.4-slim-buster
+
+# Set environment
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Working directory
+WORKDIR /app
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends netcat
+COPY --from=builder /wheels /wheels
+COPY ./requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir /wheels/*
+
+# Copy application code
+COPY . /app
+
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+# Expose the port Render should listen on
+EXPOSE 8000
+
+# Change user for security reasons
+RUN adduser --disabled-password app
+RUN chown -R app:app /app
+USER app
+
+# Command to run the application
+CMD ["gunicorn", "myproject.wsgi:application", "--bind", "0.0.0.0:8000"]

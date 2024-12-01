@@ -1,0 +1,73 @@
+services:
+  # Backend Service
+  web:
+    build:
+      context: ./backend/myproject
+      dockerfile: Dockerfile.prod
+    command: gunicorn myproject.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/media
+    expose:
+      - 8000
+    env_file:
+      - ./backend/.env.prod
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+  # PostgreSQL Database
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data/
+    env_file:
+      - ./backend/.env.prod.db
+    networks:
+      - app_network
+
+  # Backend Nginx Service
+  nginx_backend:
+    build: ./backend/myproject/nginx
+    volumes:
+      - static_volume:/home/app/web/staticfiles
+      - media_volume:/home/app/web/media
+    ports:
+      - 8000:80
+    depends_on:
+      - web
+    networks:
+      - app_network
+
+  # Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vue-app
+    ports:
+      - 8080:80
+    networks:
+      - app_network
+
+  # Frontend Nginx Service
+  nginx_frontend:
+    image: nginx:alpine
+    container_name: nginx-app
+    volumes:
+      - ./frontend/nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 80:80
+    depends_on:
+      - frontend
+    networks:
+      - app_network
+
+volumes:
+  postgres_data_prod:
+  static_volume:
+  media_volume:
+
+networks:
+  app_network:

@@ -1,0 +1,72 @@
+# Django
+*.log
+*.pot
+*.pyc
+*.pyo
+__pycache__/
+db.sqlite3
+media/
+staticfiles/
+*.env
+*.env.*
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Django migrations
+*/migrations/
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Vue.js build output
+/dist
+/build
+
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Coverage
+.coverage
+*.coveragerc
+
+# Environments
+.env
+.env.*
+.venv/
+venv/
+
+# Docker
+*.dockerignore
+docker-compose.override.yml
+Dockerfile*
+
+# pytest
+.cache
+
+# Logs
+*.log
+
+# Local IDE or editor configs
+*.swp
+*~
+.idea/
+.vscode/
+
+# JetBrains
+.idea/
+
+# Ignore virtualenv
+backend/env/
+
+# Ignore .mo files
+backend/env/lib/python*/site-packages/**/*.mo
