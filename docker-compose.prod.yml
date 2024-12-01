@@ -21,7 +21,7 @@ services:
   db:
     image: postgres:15
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_prod:/var/lib/postgresql/data/
     env_file:
       - ./backend/.env.prod.db
     networks:
@@ -65,7 +65,7 @@ services:
       - app_network
 
 volumes:
-  postgres_data:
+  postgres_data_prod:
   static_volume:
   media_volume:
 
