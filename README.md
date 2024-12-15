@@ -10,11 +10,10 @@ Tech Stack
 	Containerization: Docker, Docker Compose
 
  Major Functions
-
-	Shop Supplements: Users can view a list of available supplements, filter by categories, and add them to the cart.
-	Cart Management: Users can manage the items in their cart.
-	Membership Inquiry: Users can send an email to inquire about gym membership.
-	Contact Page: A contact form that allows users to reach the gym for general inquiries.
+- Shop Supplements: Users can view a list of available supplements, filter by categories, and add them to the cart.
+- Cart Management: Users can manage the items in their cart.
+- Membership Inquiry: Users can send an email to inquire about gym membership.
+- Contact Page: A contact form that allows users to reach the gym for general inquiries.
 
 
 Installation
